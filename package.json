@@ -1,0 +1,30 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --inspect index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kin-Xemer/blog_nodejs.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Kin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kin-Xemer/blog_nodejs/issues"
+  },
+  "homepage": "https://github.com/Kin-Xemer/blog_nodejs#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
