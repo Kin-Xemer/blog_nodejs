@@ -1,2 +1,7 @@
-.form-control {
-  background-color: red; }
+.card-img-top {
+  height: 137px; }
+
+.user-avatar {
+  height: 28px;
+  width: 28px;
+  border-radius: 50%; }
