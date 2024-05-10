@@ -17,7 +17,8 @@ class NewsController {
   };
 
   create = async (req, res, next) => {
-    res.render("courses/create");
+    console.log("check")
+    res.render("courses-page/create");
   };
 
   //[POST] /courses/store
