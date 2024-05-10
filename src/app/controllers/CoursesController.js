@@ -2,7 +2,7 @@
 const Courses = require("../models/Course");
 class NewsController {
   // [GET] /news
-  index = async(req, res) => {
+  index = async (req, res) => {
     res.render("home");
   };
   // [GET] /news:slug
@@ -17,7 +17,6 @@ class NewsController {
   };
 
   create = async (req, res, next) => {
-    console.log("check")
     res.render("courses-page/create");
   };
 
@@ -30,9 +29,32 @@ class NewsController {
       };
       // Tạo ra đối tượng mới là courses
       const course = new Courses(formData);
-      console.log(course);
-      // await course.save();
+      await course.save();
       res.redirect("/");
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  //[POST] /courses/:id/edit
+  edit = async (req, res, next) => {
+    try {
+      const course = await Courses.findOne({ _id: req.params.id }).lean();
+      res.render("me/edit", { course });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  //[PUT] /courses/:id
+  update = async (req, res, next) => {
+    try {
+      const formData = {
+        ...req.body,
+        image: `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`,
+      };
+      await Courses.updateOne({ _id: req.params.id }, formData);
+      res.redirect("/me/stored/courses");
     } catch (error) {
       next(error);
     }

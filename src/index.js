@@ -4,7 +4,7 @@ const { engine } = require("express-handlebars");
 require("dotenv").config();
 const path = require("path");
 const route = require("./routes/index.js");
-
+const methodOverride = require("method-override");
 const app = express();
 const db = require("./config/db");
 db.connect();
@@ -33,6 +33,7 @@ app.engine(
     },
   })
 );
+app.use(methodOverride("_method"));
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resource", "views"));
 //127.0.0.1 - local host

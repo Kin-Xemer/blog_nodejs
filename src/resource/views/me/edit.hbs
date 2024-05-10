@@ -1,19 +1,19 @@
-<form class="row" method="POST" action="/courses/stored">
+<form class="row" method="POST" action="/courses/{{course._id}}?_method=PUT">
   <div class="col-md-6">
     <label lass="form-label">Tên khoá học</label>
-    <input type="text" class="form-control" name="name" />
+    <input type="text" class="form-control" name="name" value="{{course.name}}" />
   </div>
   <div class="col-md-6">
     <label lass="form-label">Mô tả</label>
-    <input type="text" class="form-control" name="description" />
+    <input type="text" class="form-control" name="description" value="{{course.description}}" />
   </div>
   <div class="col-md-6">
     <label lass="form-label">Video ID</label>
-    <input type="text" class="form-control" name="videoId" />
+    <input type="text" class="form-control" name="videoId" value="{{course.videoId}}"/>
   </div>
   <div class="col-md-6">
     <label lass="form-label">Trình độ</label>
-    <input type="text" class="form-control" name="level" />
+    <input type="text" class="form-control" name="level" value="{{course.level}}"/>
   </div>
   {{!-- <div class="col-md-4">
     <label for="inputState" class="form-label">State</label>
@@ -25,6 +25,7 @@
     </select>
   </div> --}}
   <div class="col-12">
-    <button type="submit" class="btn btn-primary">Tạo khoá học</button>
+    <input type="hidden" name="_id" value="{{course._id}}">
+    <button type="submit" class="btn btn-primary mt-4">Sửa khoá học</button>
   </div>
 </form>
