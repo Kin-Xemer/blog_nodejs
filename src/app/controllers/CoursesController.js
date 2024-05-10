@@ -59,5 +59,15 @@ class NewsController {
       next(error);
     }
   };
+
+  delete = async (req, res, next) => {
+    try {
+
+      await Courses.deleteOne({ _id: req.params.id });
+      res.redirect("back");
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 module.exports = new NewsController();
