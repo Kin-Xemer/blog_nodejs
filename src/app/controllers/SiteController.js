@@ -1,8 +1,14 @@
 // đây là function Constructer
+const Courses = require("../models/Course");
 class SiteController {
   // [GET] /home
-  index = (req, res) => {
-    res.render("home");
+  index = async (req, res, next) => {
+    try {
+    const courses = await Courses.find({}).lean();
+    res.render("home", { courses });
+    } catch (error) {
+      next(error);
+    }
   };
   // [GET] /search
 

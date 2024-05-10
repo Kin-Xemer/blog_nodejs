@@ -2,15 +2,15 @@
 const Courses = require("../models/Course");
 class NewsController {
   // [GET] /news
-  index = (req, res) => {
-    res.render("news");
+  index = async(req, res) => {
+    res.render("home");
   };
   // [GET] /news:slug
 
   show = async (req, res, next) => {
     try {
       const course = await Courses.findOne({ slug: req.params.slug }).lean();
-      res.render("courses/show", { course });
+      res.render("courses-page/show", { course });
     } catch (error) {
       next(error);
     }
