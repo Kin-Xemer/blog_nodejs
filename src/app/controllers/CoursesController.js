@@ -62,8 +62,34 @@ class NewsController {
 
   delete = async (req, res, next) => {
     try {
+      await Courses.delete({ _id: req.params.id });
+      res.redirect("back");
+    } catch (error) {
+      next(error);
+    }
+  };
 
+  //course/:id/force
+  force = async (req, res, next) => {
+    try {
       await Courses.deleteOne({ _id: req.params.id });
+      res.redirect("back");
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  //[PATCH] /courses/:id/restore
+  restore = async (req, res, next) => {
+    try {
+      const course = await Courses.findDeleted({ _id: req.params.id }).lean();
+      const formData = {
+        ...course[0],
+        deleted: false,
+        deletedAt: undefined,
+      };
+      await Courses.updateOne({ _id: req.params.id }, formData);
+
       res.redirect("back");
     } catch (error) {
       next(error);

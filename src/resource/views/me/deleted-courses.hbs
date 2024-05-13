@@ -1,8 +1,5 @@
 <div class="mt-4">
-  <h3>Khoá học của tôi</h3>
-  <a href="/me/trash/courses">
-<i data-feather="trash-2"></i>
-  </a>
+  <h3>Thùng rác</h3>
   <table class="table mt-4">
     <thead>
       <tr>
@@ -22,11 +19,13 @@
           <td>{{this.name}}</td>
           <td>{{this.level}}</td>
           <td>{{this.createdAt}}</td>
-          <td><a
-              href="/courses/{{this._id}}/edit"
-              class="btn btn-link text-decoration-none"
+          <td>
+            <a 
+              href=""
+              class="btn btn-link text-decoration-none btn-restore"
+              data-id="{{this._id}}" 
             >
-              Sửa</a></td>
+              Khôi phục</a></td>
           <td><a
               href="/courses/{{this._id}}"
               class="btn btn-link text-decoration-none"
@@ -34,7 +33,7 @@
               data-bs-target="#exampleModal"
               data-bs-whatever="{{this._id}}"
             >
-              Xoá</a></td>
+              Xoá vĩnh viễn</a></td>
 
         </tr>
 
@@ -67,7 +66,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        Bạn có muốn xoá khoá học này
+        Bạn có muốn xoá vĩnh viễn khoá học này ?
       </div>
       <div class="modal-footer">
         <button
@@ -83,17 +82,32 @@
 </div>
 
 <form class="row" method="POST" name="item-delete-form"></form>
+<form class="row" method="POST" name="item-restore-form"></form>
 
 <script>
-  const exampleModal = document.getElementById('exampleModal')
-  exampleModal.addEventListener('show.bs.modal', event => {
-    const button = event.relatedTarget
-    let deleteForm = document.forms["item-delete-form"];
-    const courseId = button.getAttribute('data-bs-whatever')
-    const btnDelete = document.getElementById('btn-delete')
-    btnDelete.onclick = ()=>{
-      deleteForm.action = `/courses/${courseId}?_method=DELETE`
-      deleteForm.submit()
-    }
-})
+    document.addEventListener("DOMContentLoaded", function () {
+        let deleteForm = document.forms["item-delete-form"];
+        let restoreForm = document.forms["item-restore-form"];
+        const exampleModal = document.getElementById('exampleModal')
+        const btnRestore = $('.btn-restore')
+        
+        btnRestore.click((e) =>{
+        // do bị vướng hành vi mặc định của thẻ a nên phải sử dụng preventDefault
+        e.preventDefault()
+        let courseRestoreId = $(e.currentTarget).data("id")
+        restoreForm.action = `/courses/${courseRestoreId}/restore?_method=PUT`
+        restoreForm.submit()
+        })
+        
+        exampleModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const courseId = button.getAttribute('data-bs-whatever')
+        const btnDelete = document.getElementById('btn-delete')
+        
+        btnDelete.onclick = ()=>{
+        deleteForm.action = `/courses/${courseId}/force?_method=DELETE`
+        deleteForm.submit()
+        }
+        })
+    })
 </script>

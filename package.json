@@ -22,11 +22,13 @@
   },
   "homepage": "https://github.com/Kin-Xemer/blog_nodejs#readme",
   "dependencies": {
+    "bootstrap-icons": "^1.11.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
     "method-override": "^3.0.0",
-    "mongoose": "^8.3.4",
+    "mongoose": "^8.3.0",
+    "mongoose-delete": "^1.0.2",
     "mongoose-slug-generator": "^1.0.4",
     "morgan": "^1.10.0",
     "node-sass": "^9.0.0"

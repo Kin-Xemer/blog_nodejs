@@ -11,5 +11,14 @@ class MeController {
     next(error);
    }
   };
+
+  deletedCourses = async (req, res, next) => {
+   try {
+     const courses = await Courses.findDeleted({}).lean();
+     res.render("me/deleted-courses", { courses });
+   } catch (error) {
+    next(error);
+   }
+  };
 }
 module.exports = new MeController();
