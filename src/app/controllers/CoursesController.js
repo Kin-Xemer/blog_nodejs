@@ -82,14 +82,13 @@ class NewsController {
   //[PATCH] /courses/:id/restore
   restore = async (req, res, next) => {
     try {
-      const course = await Courses.findDeleted({ _id: req.params.id }).lean();
-      const formData = {
-        ...course[0],
-        deleted: false,
-        deletedAt: undefined,
-      };
-      await Courses.updateOne({ _id: req.params.id }, formData);
-
+      await Courses.updateOneDeleted(
+        { _id: req.params.id },
+        {
+          $set: { deleted: false },
+          $unset: { deletedAt },
+        }
+      );
       res.redirect("back");
     } catch (error) {
       next(error);
